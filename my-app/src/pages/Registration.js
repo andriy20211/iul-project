@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import { Button, Form, Container, Card, Row, Col, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Registration = () => {
@@ -11,7 +11,6 @@ const Registration = () => {
     const navigate = useNavigate();
 
     const handleAuth = async (path) => {
-
         const res = await fetch(`/api/${path}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -21,35 +20,77 @@ const Registration = () => {
         setMessage(data.message);
 
         if (res.ok) {
-
             if (data.user) {
                 localStorage.setItem('user', JSON.stringify(data.user));
             }
-            navigate('/main');
+            navigate('/welcome');
         }
     };
 
     return (
-        <div style={{ padding: '20px', textAlign: 'center' }}>
+        <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
+            <Row className="w-100 justify-content-center">
+                <Col md={8} lg={5}>
+                    <Card className="shadow-sm border-0 rounded-4 p-4">
+                        <Card.Body>
+                            <h2 className="text-center mb-4 fw-bold">Create Account</h2>
+                            
+                            {/* Show message only if it exists */}
+                            {message && (
+                                <Alert variant={message.includes('success') ? 'success' : 'danger'}>
+                                    {message}
+                                </Alert>
+                            )}
 
-            <div className=''>
-                <h2>Вхід / Реєстрація</h2>
-                <br />
-                <input placeholder="Name" onChange={e => setName(e.target.value)} />
-                <br /><br />
-                <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
-                <br /><br />
+                            <Form>
+                                <Form.Group className="mb-3" controlId="formName">
+                                    <Form.Label>Full Name</Form.Label>
+                                    <Form.Control 
+                                        type="text" 
+                                        placeholder="Enter your name" 
+                                        onChange={e => setName(e.target.value)} 
+                                    />
+                                </Form.Group>
 
-                <input type="password" placeholder="Пароль" onChange={e => setPassword(e.target.value)} />
-                <br /><br />
-                <div className='me-4'>
-                    <Button variant="primary" className='mx-4' onClick={() => handleAuth('register')}>Зареєструватися</Button>
-                    <Button variant="primary" onClick={() => handleAuth('login')}>Увійти</Button>
-                </div>
-            </div>
-            <p>{message}</p>
+                                <Form.Group className="mb-3" controlId="formEmail">
+                                    <Form.Label>Email Address</Form.Label>
+                                    <Form.Control 
+                                        type="email" 
+                                        placeholder="name@example.com" 
+                                        onChange={e => setEmail(e.target.value)} 
+                                    />
+                                </Form.Group>
 
-        </div>
+                                <Form.Group className="mb-4" controlId="formPassword">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control 
+                                        type="password" 
+                                        placeholder="Create a password" 
+                                        onChange={e => setPassword(e.target.value)} 
+                                    />
+                                </Form.Group>
+
+                                <div className="d-grid gap-2">
+                                    <Button 
+                                        variant="primary" 
+                                        size="lg" 
+                                        onClick={() => handleAuth('register')}
+                                        className="rounded-pill"
+                                    >
+                                        Sign Up
+                                    </Button>
+                                </div>
+                            </Form>
+
+                            <div className="text-center mt-4">
+                                <span className="text-muted">Already have an account? </span>
+                                <Link to="/login" className="text-decoration-none fw-bold">Log In</Link>
+                            </div>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 

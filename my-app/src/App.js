@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import './index.css'
 import { Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
 import Registration from './pages/Registration';
-import Main from './pages/Main';
+import Welcome from './pages/Welcome';
+import Login from './pages/Login';
 
 function App() {
 
@@ -23,8 +25,10 @@ function App() {
     return (
         <>
             <Routes>
-                <Route path="/" element={<Registration />} />
-                <Route path="/main" element={<Main />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/register" element={<Registration />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/welcome" element={<Welcome />} />
             </Routes>
 
         </>
