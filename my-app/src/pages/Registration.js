@@ -23,7 +23,7 @@ const Registration = () => {
             if (data.user) {
                 localStorage.setItem('user', JSON.stringify(data.user));
             }
-            navigate('/welcome');
+            navigate('/');
         }
     };
 

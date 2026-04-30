@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Toast, ToastContainer, Container, Row, Col, Card, Button, Badge } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Main() {
   const [user, setUser] = useState(null);
@@ -47,7 +47,9 @@ export default function Main() {
       {/* Dashboard Header */}
       <div className="bg-white border-bottom py-3 mb-4 shadow-sm">
         <Container className="d-flex justify-content-between align-items-center">
-          <h4 className="mb-0 fw-bold text-primary">User Dashboard</h4>
+          <h4 className="mb-0 fw-bold text-primary">
+          <Link to="/" className="text-decoration-none">SIMPLE PLAN</Link>
+          </h4>
           <Button variant="outline-danger" size="sm" onClick={handleLogout}>
             Logout
           </Button>

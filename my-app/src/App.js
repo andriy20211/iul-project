@@ -3,7 +3,7 @@ import './index.css'
 import { Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Registration from './pages/Registration';
-import Welcome from './pages/Welcome';
+import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Registration />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/welcome" element={<Welcome />} />
+                {/* <Route path="/dashboard" element={<Dashboard />} /> */}
             </Routes>
 
         </>
